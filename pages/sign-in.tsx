@@ -1,8 +1,8 @@
+import { NextPage } from 'next';
 import SignInWithGoogle from '../components/auth/SignInWithGoogle';
-import { useAuthentication } from '../lib/useAuthentication';
 import styles from'../styles/Auth.module.scss';
 
-const SignIn: React.FC = () => {
+const SignIn: NextPage = () => {
   return <div className={styles['auth']}>
     <div className="auth__container">
       Sign in
