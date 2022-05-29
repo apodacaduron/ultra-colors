@@ -7,8 +7,9 @@ const Home: NextPage = () => (
   <div className={styles.home}>
     <Banner />
     <div className={styles['home__grid']}>
-      {Array.from({ length: 20 }).map(() => (
+      {Array.from({ length: 20 }).map((_, index) => (
         <PaletteCard
+          key={index}
           paletteData={{
             paletteName: 'Volcanic orange',
             authorId: '123',
