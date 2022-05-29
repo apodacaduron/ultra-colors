@@ -5,12 +5,12 @@
   &__logo {
     @apply font-medium text-2xl;
     &:after {
-      content: ".";
+      content: '.';
       @apply text-teal-500;
     }
   }
 
   &__actions {
-    @apply flex gap-6;
+    @apply flex items-center justify-center gap-6;
   }
 }
