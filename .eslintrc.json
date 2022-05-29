@@ -7,6 +7,20 @@
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
     "react/destructuring-assignment": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "import/resolver": {
+    "node": {
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ]
+    }
   }
 }
