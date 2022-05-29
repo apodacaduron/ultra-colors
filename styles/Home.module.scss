@@ -1,6 +1,12 @@
 .home {
   @apply max-w-5xl mx-auto;
   @apply flex flex-col justify-center;
+
+  &__grid {
+    @apply grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1;
+    @apply grid gap-x-8 gap-y-4;
+    @apply mt-8;
+  }
 }
 
 .banner {
@@ -13,7 +19,7 @@
     @apply font-medium text-base;
     @apply absolute top-0 right-0 p-6;
     &:after {
-      content: ".";
+      content: '.';
       @apply text-teal-500;
     }
   }

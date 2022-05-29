@@ -10,13 +10,13 @@ import { connectStorageEmulator, getStorage } from 'firebase/storage';
 import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
 
 const firebaseConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyDzxpVYU6FJ-zLJIbGEgbgtL53N8r8UvUg',
-  authDomain: 'ultra-colors-784cb.firebaseapp.com',
-  projectId: 'ultra-colors-784cb',
-  storageBucket: 'ultra-colors-784cb.appspot.com',
-  messagingSenderId: '453359997436',
-  appId: '1:453359997436:web:b526262061dae76f322279',
-  measurementId: 'G-EYDVGQZ6X0',
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

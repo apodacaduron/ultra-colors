@@ -1,0 +1,23 @@
+.palette-card {
+  &__colors {
+    @apply flex w-full h-48;
+    @apply overflow-hidden rounded-2xl;
+    &__color {
+      @apply w-full h-full;
+      @apply transition-all duration-300;
+      &:hover {
+        @apply w-[120%];
+      }
+    }
+  }
+
+  &__info {
+    @apply mt-2;
+    &__name {
+      @apply font-medium w-full;
+    }
+    &__author {
+      @apply text-gray-500 text-xs mb-3;
+    }
+  }
+}
