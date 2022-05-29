@@ -11,13 +11,15 @@ interface Props {
 }
 
 const DAvatar: React.FC<Props> = (props) => {
-  const { stringToHexColor } = useColor();
+  const { stringToHexColor, getFontColor } = useColor();
+  const backgroundColor = stringToHexColor(props.text || '');
 
   const avatarStyles: CSSProperties = {
     width: props.size ?? '2rem',
     height: props.size ?? '2rem',
-    backgroundColor: stringToHexColor(props.text || ''),
+    backgroundColor,
     borderRadius: props.borderRadius ?? '50%',
+    color: getFontColor(backgroundColor),
   };
 
   return (

@@ -1,9 +1,9 @@
-import { Menu, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react';
+import React, { Fragment } from 'react';
 
 interface MenuProps {
-  children: React.ReactNode
-  options: Array<{ content: React.ReactNode; action(): void }>
+  children: React.ReactNode;
+  options: Array<{ content: React.ReactNode; action(): void }>;
 }
 
 const DMenu: React.FC<MenuProps> = (props) => {
@@ -39,7 +39,7 @@ const DMenu: React.FC<MenuProps> = (props) => {
         </Menu.Items>
       </Transition>
     </Menu>
-  )
-}
+  );
+};
 
-export default DMenu
+export default DMenu;

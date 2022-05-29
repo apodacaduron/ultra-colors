@@ -1,0 +1,1 @@
+declare module 'make-color-accessible';

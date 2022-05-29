@@ -1,3 +1,6 @@
+import fontColorContrast from 'font-color-contrast';
+import makeColorAccesible from 'make-color-accessible';
+
 export const useColor = () => {
   function stringToHexColor(text: string) {
     let hash = 0;
@@ -14,10 +17,15 @@ export const useColor = () => {
       color += `00${value.toString(16)}`.substr(-2);
     }
 
-    return color;
+    return makeColorAccesible(color);
+  }
+
+  function getFontColor(color: string) {
+    return fontColorContrast(color);
   }
 
   return {
-    stringToHexColor
+    stringToHexColor,
+    getFontColor
   }
 }

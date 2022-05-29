@@ -1,19 +1,22 @@
 .home {
-  @apply max-w-5xl mx-auto;
-  @apply flex flex-col justify-center;
-
-  &__grid {
-    @apply grid-cols-1 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1;
-    @apply grid gap-x-8 gap-y-4;
-    @apply mt-8;
+  @apply flex justify-center items-center;
+  @apply w-full;
+  &__container {
+    @apply max-w-7xl w-full mx-4;
+    @apply flex flex-col justify-center items-center;
+    &__grid {
+      @apply lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1;
+      @apply grid gap-x-8 gap-y-4;
+      @apply mt-12 mb-32 w-full;
+    }
   }
 }
 
 .banner {
-  @apply rounded-2xl max-w-5xl h-44;
+  @apply rounded-2xl max-w-7xl w-full h-44;
   @apply bg-teal-500 bg-opacity-10;
   @apply shadow-sm shadow-teal-50;
-  @apply relative;
+  @apply relative mt-8;
 
   &__logo {
     @apply font-medium text-base;
