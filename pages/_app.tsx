@@ -8,8 +8,6 @@ import { useAuthentication } from '../lib/useAuthentication';
 function MyApp({ Component, pageProps }: AppProps) {
   const authInstance = useAuthentication();
 
-  console.log(authInstance.user);
-
   return (
     <UserContext.Provider value={{ user: authInstance.user }}>
       <Navbar />

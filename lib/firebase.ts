@@ -27,7 +27,7 @@ export const storage = getStorage(app);
 export const functions = getFunctions(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 
-if (window.location.hostname === 'localhost') {
+if (process.env.NODE_ENV === 'development') {
   connectFirestoreEmulator(firestore, 'localhost', 8080);
   connectAuthEmulator(auth, 'http://localhost:9099');
   connectFunctionsEmulator(functions, 'localhost', 5001);

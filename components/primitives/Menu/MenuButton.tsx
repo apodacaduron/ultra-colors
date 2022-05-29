@@ -6,7 +6,7 @@ interface MenuButtonProps {
 
 const DMenuButton: React.FC<MenuButtonProps> = (props) => {
   return (
-    <Menu.Button className="inline-flex justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none">
+    <Menu.Button className="focus:outline-none">
       {props.children}
     </Menu.Button>
   )

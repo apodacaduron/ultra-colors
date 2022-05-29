@@ -12,5 +12,25 @@
 
   &__actions {
     @apply flex items-center justify-center gap-6;
+
+    &__account {
+      &__profile-menu {
+        @apply flex items-center gap-2;
+      }
+
+      &__popover {
+        @apply p-4 max-w-xs;
+        @apply flex flex-col justify-center items-center;
+        &__title {
+          @apply font-medium w-full;
+        }
+        &__description {
+          @apply text-gray-500 text-xs mb-3;
+        }
+        &__sign-in {
+          @apply w-[200px];
+        }
+      }
+    }
   }
 }

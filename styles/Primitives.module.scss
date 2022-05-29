@@ -1,0 +1,8 @@
+.avatar {
+  @apply flex justify-center items-center text-white;
+  @apply overflow-hidden;
+
+  & img {
+    @apply object-cover w-full h-full;
+  }
+}
