@@ -3,7 +3,10 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
     "react/destructuring-assignment": "off",
@@ -15,12 +18,7 @@
   },
   "import/resolver": {
     "node": {
-      "extensions": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx"
-      ]
+      "extensions": [".js", ".jsx", ".ts", ".tsx"]
     }
   }
 }
