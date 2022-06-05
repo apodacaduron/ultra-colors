@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import type { FirebaseOptions } from 'firebase/app';
-import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
+import { connectFirestoreEmulator, DocumentData, getFirestore, QueryDocumentSnapshot } from 'firebase/firestore';
 import {
   connectAuthEmulator,
   getAuth,
@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { connectStorageEmulator, getStorage } from 'firebase/storage';
 import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
+import { errorHandler } from './errorHandler';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -28,8 +29,22 @@ export const functions = getFunctions(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 
 if (process.env.NODE_ENV === 'development') {
-  connectFirestoreEmulator(firestore, 'localhost', 8080);
-  connectAuthEmulator(auth, 'http://localhost:9099');
-  connectFunctionsEmulator(functions, 'localhost', 5001);
-  connectStorageEmulator(storage, 'localhost', 9199);
+  try {
+    connectFirestoreEmulator(firestore, 'localhost', 8080);
+    connectAuthEmulator(auth, 'http://localhost:9099');
+    connectFunctionsEmulator(functions, 'localhost', 5001);
+    connectStorageEmulator(storage, 'localhost', 9199);
+  } catch (err) {
+    errorHandler(err)
+  }
+}
+
+export function postToJSON(doc: QueryDocumentSnapshot<DocumentData>) {
+  const data = doc.data();
+  return {
+    ...data,
+    // Gotcha! firestore timestamp NOT serializable to JSON. Must convert to milliseconds
+    createdAt: data.createdAt.toMillis(),
+    updatedAt: data.updatedAt.toMillis(),
+  };
 }

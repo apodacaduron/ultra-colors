@@ -16,6 +16,10 @@
     &__actions {
       @apply flex items-center justify-center gap-6;
 
+      &__add {
+        @apply flex items-center justify-center;
+      }
+
       &__account {
         &__profile-menu {
           @apply flex items-center gap-2;

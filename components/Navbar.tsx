@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 import { useAuthentication } from '../lib/useAuthentication';
 import styles from '../styles/Navbar.module.scss';
-import { DMenu, DMenuButton, DPopover } from './primitives';
+import { DIconLinkButton, DMenu, DMenuButton, DPopover } from './primitives';
 import { DAvatar } from './primitives/Avatar';
 import { PlusSmIcon } from '@heroicons/react/solid';
 
@@ -28,8 +28,10 @@ const Navbar: React.FC = () => {
           <Link href="/">UltraColors</Link>
         </div>
         <div className={styles['navbar__container__actions']}>
-          <div className="navbar__container__actions__add">
-            <PlusSmIcon className="h-5 w-5" />
+          <div className={styles["navbar__container__actions__add"]}>
+            <DIconLinkButton href={'/create'}>
+              <PlusSmIcon className="h-5 w-5" />
+            </DIconLinkButton>
           </div>
           <div className="navbar__container__actions__units">Hex</div>
           <div className="navbar__container__actions__account">

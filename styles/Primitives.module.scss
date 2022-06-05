@@ -6,3 +6,17 @@
     @apply object-cover w-full h-full;
   }
 }
+
+.icon-button {
+  @apply border border-transparent rounded-md;
+  @apply transition-all;
+  @apply flex justify-center items-center;
+
+  &:hover {
+    @apply border-slate-300;
+  }
+
+  &--size-md {
+    @apply w-8 h-8;
+  }
+}
