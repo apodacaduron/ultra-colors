@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Popover, Transition } from '@headlessui/react';
 import { usePopper } from 'react-popper';
+
+import { Popover, Transition } from '@headlessui/react';
 import { Placement } from '@popperjs/core';
+
+import styles from '../../../styles/Primitives.module.scss';
 
 interface Props {
   children: React.ReactNode;
@@ -12,9 +15,13 @@ interface Props {
 const DPopover: React.FC<Props> = React.forwardRef((props, _) => {
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement>();
   const [popperElement, setPopperElement] = useState<HTMLDivElement>();
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: props.placement ?? 'bottom-start',
-  });
+  const { styles: popperStyles, attributes } = usePopper(
+    referenceElement,
+    popperElement,
+    {
+      placement: props.placement ?? 'bottom-start',
+    }
+  );
 
   return (
     <Popover className="relative z-10">
@@ -22,8 +29,7 @@ const DPopover: React.FC<Props> = React.forwardRef((props, _) => {
         <>
           <Popover.Button
             ref={(ref: HTMLButtonElement) => setReferenceElement(ref)}
-            className={`
-          group inline-flex items-center rounded-md px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+            className={`${styles['button']} ${styles['button--contained']}`}
           >
             {props.buttonText}
           </Popover.Button>
@@ -37,7 +43,7 @@ const DPopover: React.FC<Props> = React.forwardRef((props, _) => {
           >
             <Popover.Panel
               ref={(ref: HTMLDivElement) => setPopperElement(ref)}
-              style={styles.popper}
+              style={popperStyles.popper}
               {...attributes.popper}
               className="w-max bg-white"
             >
