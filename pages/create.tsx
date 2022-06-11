@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 
 import { PlusIcon } from '@heroicons/react/outline';
@@ -8,6 +8,8 @@ import CircularColor from '../components/CircularColor';
 import DButton from '../components/primitives/Button/Button';
 import { DSidebar } from '../components/primitives/Sidebar';
 import styles from '../styles/Palette.module.scss';
+import { DCheckbox, DLabel } from '../components/primitives/Input';
+import DFormRow from '../components/primitives/Input/FormRow';
 
 type ColorMap = {
   id: string;
@@ -18,6 +20,15 @@ const Create: NextPage = () => {
   const [colors, setColors] = useState<Array<ColorMap>>([]);
   const [pickerColor, setPickerColor] = useState('#ffffff00');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [keepSidebarOpen, setKeepSidebarOpen] = useState(false);
+
+  function addColor() {
+    setColors((state) => [
+      ...state,
+      { id: Date.now().toString(), hex: pickerColor },
+    ]);
+    if (!keepSidebarOpen) setSidebarOpen(false);
+  }
 
   return (
     <div className={styles['create']}>
@@ -57,9 +68,22 @@ const Create: NextPage = () => {
               onChange={setPickerColor}
               style={{ width: '100%', height: '256px' }}
             />
-
-            <DButton variant="text">Cancel</DButton>
-            <DButton>Add color</DButton>
+            <div className="mt-6">
+              <DFormRow gap="8px">
+                <DCheckbox
+                  id="keep-sidebar-open"
+                  checked={keepSidebarOpen}
+                  onChange={(event) => setKeepSidebarOpen(event.target.checked)}
+                />
+                <DLabel htmlFor="keep-sidebar-open">Keep sidebar open</DLabel>
+              </DFormRow>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <DButton variant="text" onClick={() => setSidebarOpen(false)}>
+                Close
+              </DButton>
+              <DButton onClick={addColor}>Add color</DButton>
+            </div>
           </DSidebar>
         </div>
       </div>
