@@ -1,0 +1,1 @@
+export const hexColorRegex = /^#?[0-9A-F]{6}$/i

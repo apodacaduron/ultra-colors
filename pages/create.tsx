@@ -5,11 +5,12 @@ import { HexColorPicker } from 'react-colorful';
 import { PlusIcon } from '@heroicons/react/outline';
 
 import CircularColor from '../components/CircularColor';
+import TopToolbar from '../components/create/TopToolbar';
 import DButton from '../components/primitives/Button/Button';
-import { DSidebar } from '../components/primitives/Sidebar';
-import styles from '../styles/Palette.module.scss';
-import { DCheckbox, DLabel } from '../components/primitives/Input';
+import { DCheckbox, DInput, DLabel } from '../components/primitives/Input';
 import DFormRow from '../components/primitives/Input/FormRow';
+import { DSidebar } from '../components/primitives/Sidebar';
+import styles from '../styles/Create.module.scss';
 
 type ColorMap = {
   id: string;
@@ -18,11 +19,11 @@ type ColorMap = {
 
 const Create: NextPage = () => {
   const [colors, setColors] = useState<Array<ColorMap>>([]);
-  const [pickerColor, setPickerColor] = useState('#ffffff00');
+  const [pickerColor, setPickerColor] = useState('#ffffff');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [keepSidebarOpen, setKeepSidebarOpen] = useState(false);
 
-  function addColor() {
+  function pushColorToList() {
     setColors((state) => [
       ...state,
       { id: Date.now().toString(), hex: pickerColor },
@@ -32,6 +33,7 @@ const Create: NextPage = () => {
 
   return (
     <div className={styles['create']}>
+      <TopToolbar right={<DButton>Create</DButton>} />
       <div className={styles['create__container']}>
         <div className={styles['create__container__header']}>
           <h1>Create your palette</h1>
@@ -69,6 +71,16 @@ const Create: NextPage = () => {
               style={{ width: '100%', height: '256px' }}
             />
             <div className="mt-6">
+              <DFormRow gap="8px" flexDirection="column">
+                <DLabel htmlFor="hex-color">Hex color</DLabel>
+                <DInput
+                  id="hex-color"
+                  value={pickerColor}
+                  onChange={(event) => setPickerColor(event.target.value)}
+                />
+              </DFormRow>
+            </div>
+            <div className="mt-6">
               <DFormRow gap="8px">
                 <DCheckbox
                   id="keep-sidebar-open"
@@ -82,7 +94,7 @@ const Create: NextPage = () => {
               <DButton variant="text" onClick={() => setSidebarOpen(false)}>
                 Close
               </DButton>
-              <DButton onClick={addColor}>Add color</DButton>
+              <DButton onClick={pushColorToList}>Add color</DButton>
             </div>
           </DSidebar>
         </div>

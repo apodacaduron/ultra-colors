@@ -22,32 +22,6 @@
   }
 }
 
-.create {
-  @apply flex justify-center;
-  height: calc(100vh - 64px);
-
-  &__container {
-    @apply max-w-7xl flex flex-col;
-    &__header {
-      @apply w-full text-center;
-      & > h1 {
-        @apply text-[32px];
-      }
-      & > p {
-        @apply text-slate-500;
-      }
-    }
-    &__palette {
-      @apply p-8 max-w-2xl;
-      @apply flex flex-wrap justify-center items-center gap-4;
-
-      &__plus-icon {
-        @apply w-8 h-8;
-      }
-    }
-  }
-}
-
 .circular-color {
   @apply relative;
   &:hover > &__action {

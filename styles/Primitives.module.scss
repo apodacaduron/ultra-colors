@@ -46,6 +46,7 @@
   @apply bg-slate-50;
   @apply flex justify-center;
   @apply w-6 h-6 rounded-[6px];
+  @apply transition-all;
   &:checked {
     @apply bg-blue-500 border-blue-500;
     &:after {
@@ -63,5 +64,16 @@
 }
 
 .form-row {
-  @apply flex items-center;
+  @apply flex;
+}
+
+.input {
+  @apply cursor-default rounded-lg text-left;
+  @apply py-2 px-3 border border-slate-200 bg-slate-50;
+  @apply transition-all;
+  @apply focus-within:border focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-50 focus-within:bg-white;
+  &__field {
+    @apply w-full border-none text-base text-slate-900;
+    @apply outline-none bg-transparent;
+  }
 }

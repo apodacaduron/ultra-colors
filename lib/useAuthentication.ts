@@ -1,12 +1,13 @@
-import { signInWithPopup, signOut as signOutFirebase } from "firebase/auth"
-import { httpsCallable } from "firebase/functions"
-import { useAuthState } from "react-firebase-hooks/auth"
-import { errorHandler } from "./errorHandler"
-import { auth, functions, googleAuthProvider } from "./firebase"
+import { signInWithPopup, signOut as signOutFirebase } from 'firebase/auth';
+import { httpsCallable } from 'firebase/functions';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import { errorHandler } from './errorHandler';
+import { auth, functions, googleAuthProvider } from './firebase';
 
 export const useAuthentication = () => {
   // State
-  const [user] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
 
   // Callable functions
   const onSignUp = httpsCallable(functions, 'onSignUp')
@@ -26,6 +27,7 @@ export const useAuthentication = () => {
 
   return {
     user,
+    userLoading: loading,
     signInWithGoogle,
     signOut,
   }
