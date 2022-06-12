@@ -27,6 +27,7 @@
     "react-hot-toast": "^2.2.0",
     "react-popper": "^2.3.0",
     "react-use": "^17.4.0",
+    "short-unique-id": "^4.4.4",
     "short-uuid": "^4.2.0"
   },
   "devDependencies": {

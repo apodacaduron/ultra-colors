@@ -1,11 +1,5 @@
-import {
-  collectionGroup,
-  getDocs,
-  query,
-  limit as limitQuery,
-  where,
-} from 'firebase/firestore';
-import type { NextPage } from 'next';
+import { collectionGroup, getDocs, limit as limitQuery, query, where } from 'firebase/firestore';
+
 import Banner from '../components/home/Banner';
 import PaletteCard from '../components/PaletteCard';
 import { PostNormalized } from '../lib/converters/PostConverter';
@@ -13,6 +7,7 @@ import { firestore, postToJSON } from '../lib/firebase';
 import { usePosts } from '../lib/usePosts';
 import styles from '../styles/Home.module.scss';
 
+import type { NextPage } from 'next';
 interface Props {
   posts: Array<PostNormalized>;
 }
@@ -49,7 +44,7 @@ const Home: NextPage<Props> = (props) => {
                 paletteData={{
                   paletteName: post.title,
                   authorId: '123',
-                  authorName: 'Daniel',
+                  authorName: post.user.displayName ?? '',
                   colors: ['#f6e58d', '#f9ca24', '#ffbe76'],
                 }}
               />

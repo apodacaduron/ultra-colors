@@ -1,28 +1,31 @@
 import {
-  collectionGroup,
-  getDocs,
-  limit as limitQuery,
-  orderBy,
-  query,
-  startAfter,
-  Timestamp,
-  where,
+    collectionGroup, getDocs, limit as limitQuery, query, startAfter, Timestamp, where
 } from 'firebase/firestore';
-import { useState } from 'react';
-import { postConverter, PostNormalized } from './converters/PostConverter';
-import { firestore, postToJSON } from './firebase';
+import React, { useState } from 'react';
+import { useHttpsCallable } from 'react-firebase-hooks/functions';
+import toast from 'react-hot-toast';
+
+import { postConverter } from './converters/PostConverter';
+import { firestore, functions, postToJSON } from './firebase';
+import { PostNormalized } from './utils/types';
 
 type UsePostsOptions = {
   posts: Array<PostNormalized>
   limit: number
 }
-export const usePosts = (options: UsePostsOptions) => {
+export const usePosts = (options?: UsePostsOptions) => {
   // State
-  const limit = options.limit ?? 20;
-  const [posts, setPosts] = useState<Array<PostNormalized>>(options.posts);
+  const limit = options?.limit ?? 20;
+  const [posts, setPosts] = useState<Array<PostNormalized>>(options?.posts ?? []);
   const [loading, setLoading] = useState(false);
-  const [hasMorePosts, setHasMorePosts] = useState(options.posts.length >= limit);
+  const [hasMorePosts, setHasMorePosts] = useState((options?.posts.length ?? 0) >= limit);
   const hasPosts = Boolean(posts?.length);
+
+  // Callable functions
+  const [createPostCF, createPostLoadingCF, createPostErrorCF] = useHttpsCallable(functions, 'createPost');
+  React.useEffect(() => {
+    if (createPostErrorCF?.message) toast.error(createPostErrorCF.message)
+  }, [createPostErrorCF?.message])
 
   // Handlers
   async function getMorePosts() {
@@ -53,12 +56,21 @@ export const usePosts = (options: UsePostsOptions) => {
   }
 
   return {
+    // State
     hasPosts,
     limit,
     posts,
     loading,
     hasMorePosts,
+
+    // Callable functions
+    createPostCF,
+    createPostLoadingCF,
+    createPostErrorCF,
+
+    // Handlers
     setPosts,
     getMorePosts,
   };
 };
+

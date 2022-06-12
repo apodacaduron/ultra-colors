@@ -1,40 +1,28 @@
 import {
-  DocumentData,
-  QueryDocumentSnapshot,
-  SnapshotOptions,
-  Timestamp,
-  WithFieldValue,
+    DocumentData, QueryDocumentSnapshot, SnapshotOptions, Timestamp, WithFieldValue
 } from 'firebase/firestore';
 
-export type PostNormalized = {
-  title: string,
-  slug: string,
-  authorId: string,
-  authorName: string,
-  published: boolean,
-  colors: Array<string>,
-  likeCount: number,
-  viewCount: number,
-  createdAt?: number,
-  updatedAt?: number
-}
+import { ColorList } from '../utils/types';
 
 export class Post {
   constructor(
     readonly title: string,
-    readonly slug: string,
-    readonly authorId: string,
-    readonly authorName: string,
     readonly published: boolean,
-    readonly colors: Array<string>,
-    readonly likeCount: number,
+    readonly deleted: boolean,
+    readonly heartCount: number,
     readonly viewCount: number,
+    readonly palette: ColorList,
+    readonly user: {
+      uid: string
+      displayName: string | null
+      avatar: string | null
+    },
     readonly createdAt?: Timestamp,
     readonly updatedAt?: Timestamp
   ) { }
 
   toString(): string {
-    return `Title: ${this.title}, AuthorName: ${this.authorName}, Published: ${this.published}, Colors: ${this.colors}`;
+    return `Title: ${this.title}, AuthorName: ${this.user.displayName}, Published: ${this.published}, Colors: ${this.palette}`;
   }
 }
 
@@ -49,13 +37,12 @@ export const postConverter = {
     const data = snapshot.data(options)!;
     return new Post(
       data.title,
-      data.slug,
-      data.authorId,
-      data.authorName,
       data.published,
-      data.colors,
-      data.likeCount,
+      data.deleted,
+      data.heartCount,
       data.viewCount,
+      data.palette,
+      data.user,
       data.createdAt?.toMillis(),
       data.updatedAt?.toMillis()
     );

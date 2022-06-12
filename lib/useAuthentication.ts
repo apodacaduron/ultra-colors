@@ -2,8 +2,8 @@ import { signInWithPopup, signOut as signOutFirebase } from 'firebase/auth';
 import { httpsCallable } from 'firebase/functions';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { errorHandler } from './errorHandler';
 import { auth, functions, googleAuthProvider } from './firebase';
+import { errorHandler } from './utils/errorHandler';
 
 export const useAuthentication = () => {
   // State
